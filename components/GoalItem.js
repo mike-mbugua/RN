@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     backgroundColor: "blue",
   },
   goalText: {
-    color: "#cccccc",
+    color: "white",
     padding: 10,
   },
 });
