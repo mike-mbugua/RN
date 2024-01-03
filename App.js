@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { Button, FlatList, StyleSheet, Text, View } from "react-native";
+import {
+  Button,
+  FlatList,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import GoalItem from "./components/GoalItem";
 import GoalInput from "./components/GoalInput";
 
@@ -10,15 +17,15 @@ export default function App() {
   function startAddGoalHandler() {
     setModalIsVisible(true);
   }
+  // function endGoalHandler() {
+  //   setModalIsVisible(false);
+  // }
 
   function addGoalHandler(enteredText) {
-    if (enteredText.trim() !== "") {
-      setCourseGoals((currentGoals) => [
-        ...currentGoals,
-        { text: enteredText, id: Math.random().toString() },
-      ]);
-    }
-    alert("cannot add empty goals");
+    setCourseGoals((currentGoals) => [
+      ...currentGoals,
+      { text: enteredText, id: Math.random().toString() },
+    ]);
   }
 
   function onDeleteHandler(id) {
@@ -28,10 +35,20 @@ export default function App() {
   }
   return (
     <View style={styles.appContainer}>
-      <Button title="Add new Goal" onPress={startAddGoalHandler} />
+      <Button
+        title="Add new Goal"
+        onPress={startAddGoalHandler}
+        color="#b180f0"
+      />
 
       {modalIsVisible && (
-        <GoalInput visible={modalIsVisible} onAddGoal={addGoalHandler} />
+        <GoalInput
+          visible={modalIsVisible}
+          onAddGoal={addGoalHandler}
+          endGoalHandler={() => {
+            setModalIsVisible(false);
+          }}
+        />
       )}
       <View style={styles.goalContainer}>
         <FlatList
@@ -51,10 +68,11 @@ export default function App() {
 
 const styles = StyleSheet.create({
   appContainer: {
-    marginTop: 50,
+    paddingTop: 50,
     flex: 1,
     justifyContent: "center",
-    marginHorizontal: 10,
+    paddingHorizontal: 10,
+    backgroundColor: "#311b6b",
   },
 
   goalContainer: {
